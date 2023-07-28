@@ -1,0 +1,36 @@
+(defvar home_dir "/home/$USER/.config/eww/Scripts")
+
+(defpoll time :interval "20s"
+`date +" %a %b %d %I:%M %p"`)
+
+(defpoll battery :interval "30s"
+`/home/$USER/.config/eww/Scripts/battery.bash`)
+
+(defpoll volume :interval "1s"
+`/home/$USER/.config/eww/Scripts/volume.bash`)
+
+(defpoll wifi :interval "3s"
+`/home/$USER/.config/eww/Scripts/wifi.bash`)
+
+(deflisten workspaces :initial "(box (label :text \"󰄯  󰄰  󰄰  󰄰  󰄰\" ))"
+`/home/$USER/.config/eww/Scripts/workspaces.bash`)
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry
+    :width "100%"
+    :height "12px"
+  :anchor "top center")
+  :exclusive true
+  
+  (box :class "main-container"
+    
+    (box :class "workspaces" :halign "start" :valign "center"
+      (literal :content "${workspaces}")
+    )
+    
+    (box :class "time_battery" :halign "end" "${wifi} ${volume} ${battery} ${time}")
+    
+  )
+)
