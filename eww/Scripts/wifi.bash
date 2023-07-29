@@ -6,8 +6,7 @@ get_ssid() {
 
     if [ $ssid_len != 0 ]; then
         echo ${icons[0]}
-    fi
-    if [ $ssid_len -eq 0 ]; then
+    elif [ $ssid_len -eq 0 ]; then
         echo ${icons[1]}
     fi
 
